@@ -6,7 +6,7 @@ from discord import client
 from discord.ext import commands
 from dotenv import load_dotenv
 
-DISCORD_TOKEN = 'MTA0NDgyMjk5OTYxMTc1MjQ1OA.GXgDhY.tyQRr1Vce8fpIr_yn7AZqRgf0aiuBSwD226oqg'
+DISCORD_TOKEN = 'MTA0NDgyMjk5OTYxMTc1MjQ1OA.GmDbGm.RC7czVPuqdVB1Z7XJrBZ2jq3N4vmWmExBJTwd0'
 
 load_dotenv()
 TOKEN = os.getenv(DISCORD_TOKEN)

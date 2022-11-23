@@ -3,6 +3,8 @@ import random
 
 import discord
 from discord import client
+from discord import member
+from discord.ext.commands import has_permissions, MissingPermissions
 from discord.ext import commands
 from dotenv import load_dotenv
 
@@ -72,4 +74,34 @@ async def albert_fish(ctx):
 async def percent_black(ctx, who):
     p_black = str(random.randrange(1, 100))
     await ctx.send(who + ' is ' + p_black + '% ' + 'black!')
+
+@bot.command(name= 'purge', help= 'delet message')
+async def purge(ctx, amount = 5):
+    await ctx.channel.purge(limit= amount)
+
+@bot.command(name='kick', help='kick nerds')
+@has_permissions(kick_members = True)
+async def kick(ctx, member: discord.Member, *, reason= None):
+    await member.kick(reason=reason)
+    await ctx.send(f'User {member} has been kicked')
+
+@kick.error
+async def kick_error(ctx, error):
+    if isinstance(error, commands.MissingPermissions):
+        await ctx.send("You don't have permission to kick people!")
+
+@bot.command(name='ban', help='ban nerds')
+@has_permissions(ban_members = True)
+async def ban(ctx, member: discord.Member, *, reason= None):
+    await member.ban(reason=reason)
+    await ctx.send(f'User {member} has been banned')
+
+@ban.error
+async def ban_error(ctx, error):
+    if isinstance(error, commands.MissingPermissions):
+        await ctx.send("You don't have permission to ban people!")
+
+
 bot.run(DISCORD_TOKEN)
+
+
